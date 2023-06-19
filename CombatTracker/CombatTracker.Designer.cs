@@ -29,8 +29,14 @@ namespace CombatTracker
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CombatTracker));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.col_Init = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_StatusText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_HP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_StatusImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.tb_Val = new System.Windows.Forms.TextBox();
             this.button14 = new System.Windows.Forms.Button();
             this.btn_Unconcious = new System.Windows.Forms.Button();
@@ -54,10 +60,7 @@ namespace CombatTracker
             this.btn_Heal = new System.Windows.Forms.Button();
             this.btn_Modify = new System.Windows.Forms.Button();
             this.btn_Dmg = new System.Windows.Forms.Button();
-            this.col_Init = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_HP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Status = new System.Windows.Forms.DataGridViewImageColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,9 +73,10 @@ namespace CombatTracker
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Init,
+            this.col_StatusText,
             this.col_Name,
             this.col_HP,
-            this.col_Status});
+            this.col_StatusImage});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -82,6 +86,41 @@ namespace CombatTracker
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
+            // 
+            // col_Init
+            // 
+            this.col_Init.HeaderText = "Initiative";
+            this.col_Init.Name = "col_Init";
+            this.col_Init.ReadOnly = true;
+            this.col_Init.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_StatusText
+            // 
+            this.col_StatusText.HeaderText = "StatusText";
+            this.col_StatusText.Name = "col_StatusText";
+            this.col_StatusText.ReadOnly = true;
+            this.col_StatusText.Visible = false;
+            // 
+            // col_Name
+            // 
+            this.col_Name.HeaderText = "Name";
+            this.col_Name.Name = "col_Name";
+            this.col_Name.ReadOnly = true;
+            this.col_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_HP
+            // 
+            this.col_HP.HeaderText = "HP";
+            this.col_HP.Name = "col_HP";
+            this.col_HP.ReadOnly = true;
+            this.col_HP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_StatusImage
+            // 
+            this.col_StatusImage.HeaderText = "Status";
+            this.col_StatusImage.Name = "col_StatusImage";
+            this.col_StatusImage.ReadOnly = true;
+            this.col_StatusImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // tb_Val
             // 
@@ -109,6 +148,7 @@ namespace CombatTracker
             this.btn_Unconcious.Name = "btn_Unconcious";
             this.btn_Unconcious.Size = new System.Drawing.Size(25, 25);
             this.btn_Unconcious.TabIndex = 33;
+            this.toolTip1.SetToolTip(this.btn_Unconcious, resources.GetString("btn_Unconcious.ToolTip"));
             this.btn_Unconcious.UseVisualStyleBackColor = true;
             this.btn_Unconcious.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -120,6 +160,7 @@ namespace CombatTracker
             this.btn_Stunned.Name = "btn_Stunned";
             this.btn_Stunned.Size = new System.Drawing.Size(25, 25);
             this.btn_Stunned.TabIndex = 32;
+            this.toolTip1.SetToolTip(this.btn_Stunned, resources.GetString("btn_Stunned.ToolTip"));
             this.btn_Stunned.UseVisualStyleBackColor = true;
             this.btn_Stunned.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -131,6 +172,7 @@ namespace CombatTracker
             this.btn_Restrained.Name = "btn_Restrained";
             this.btn_Restrained.Size = new System.Drawing.Size(25, 25);
             this.btn_Restrained.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.btn_Restrained, resources.GetString("btn_Restrained.ToolTip"));
             this.btn_Restrained.UseVisualStyleBackColor = true;
             this.btn_Restrained.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -142,6 +184,7 @@ namespace CombatTracker
             this.btn_Prone.Name = "btn_Prone";
             this.btn_Prone.Size = new System.Drawing.Size(25, 25);
             this.btn_Prone.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.btn_Prone, resources.GetString("btn_Prone.ToolTip"));
             this.btn_Prone.UseVisualStyleBackColor = true;
             this.btn_Prone.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -153,6 +196,8 @@ namespace CombatTracker
             this.btn_Poisoned.Name = "btn_Poisoned";
             this.btn_Poisoned.Size = new System.Drawing.Size(25, 25);
             this.btn_Poisoned.TabIndex = 29;
+            this.toolTip1.SetToolTip(this.btn_Poisoned, "Poisoned:\r\n- A poisoned creature has disadvantage on attack rolls and ability che" +
+        "cks.");
             this.btn_Poisoned.UseVisualStyleBackColor = true;
             this.btn_Poisoned.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -164,6 +209,7 @@ namespace CombatTracker
             this.btn_Petrified.Name = "btn_Petrified";
             this.btn_Petrified.Size = new System.Drawing.Size(25, 25);
             this.btn_Petrified.TabIndex = 28;
+            this.toolTip1.SetToolTip(this.btn_Petrified, resources.GetString("btn_Petrified.ToolTip"));
             this.btn_Petrified.UseVisualStyleBackColor = true;
             this.btn_Petrified.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -175,6 +221,7 @@ namespace CombatTracker
             this.btn_Paralyzed.Name = "btn_Paralyzed";
             this.btn_Paralyzed.Size = new System.Drawing.Size(25, 25);
             this.btn_Paralyzed.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.btn_Paralyzed, resources.GetString("btn_Paralyzed.ToolTip"));
             this.btn_Paralyzed.UseVisualStyleBackColor = true;
             this.btn_Paralyzed.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -186,6 +233,7 @@ namespace CombatTracker
             this.btn_Invisible.Name = "btn_Invisible";
             this.btn_Invisible.Size = new System.Drawing.Size(25, 25);
             this.btn_Invisible.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.btn_Invisible, resources.GetString("btn_Invisible.ToolTip"));
             this.btn_Invisible.UseVisualStyleBackColor = true;
             this.btn_Invisible.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -197,6 +245,7 @@ namespace CombatTracker
             this.btn_Incapacitated.Name = "btn_Incapacitated";
             this.btn_Incapacitated.Size = new System.Drawing.Size(25, 25);
             this.btn_Incapacitated.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.btn_Incapacitated, "Incapacitated:\r\n- An incapacitated creature can’t take actions or reactions.");
             this.btn_Incapacitated.UseVisualStyleBackColor = true;
             this.btn_Incapacitated.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -208,6 +257,7 @@ namespace CombatTracker
             this.btn_Grappled.Name = "btn_Grappled";
             this.btn_Grappled.Size = new System.Drawing.Size(25, 25);
             this.btn_Grappled.TabIndex = 24;
+            this.toolTip1.SetToolTip(this.btn_Grappled, resources.GetString("btn_Grappled.ToolTip"));
             this.btn_Grappled.UseVisualStyleBackColor = true;
             this.btn_Grappled.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -219,6 +269,7 @@ namespace CombatTracker
             this.btn_Frightened.Name = "btn_Frightened";
             this.btn_Frightened.Size = new System.Drawing.Size(25, 25);
             this.btn_Frightened.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.btn_Frightened, resources.GetString("btn_Frightened.ToolTip"));
             this.btn_Frightened.UseVisualStyleBackColor = true;
             this.btn_Frightened.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -230,6 +281,8 @@ namespace CombatTracker
             this.btn_Deaf.Name = "btn_Deaf";
             this.btn_Deaf.Size = new System.Drawing.Size(25, 25);
             this.btn_Deaf.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.btn_Deaf, "Deafened:\r\n- A deafened creature can’t hear and automatically fails any ability c" +
+        "heck that requires hearing.");
             this.btn_Deaf.UseVisualStyleBackColor = true;
             this.btn_Deaf.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -241,6 +294,7 @@ namespace CombatTracker
             this.btn_Charmed.Name = "btn_Charmed";
             this.btn_Charmed.Size = new System.Drawing.Size(25, 25);
             this.btn_Charmed.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.btn_Charmed, resources.GetString("btn_Charmed.ToolTip"));
             this.btn_Charmed.UseVisualStyleBackColor = true;
             this.btn_Charmed.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -252,6 +306,7 @@ namespace CombatTracker
             this.btn_Blinded.Name = "btn_Blinded";
             this.btn_Blinded.Size = new System.Drawing.Size(25, 25);
             this.btn_Blinded.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.btn_Blinded, resources.GetString("btn_Blinded.ToolTip"));
             this.btn_Blinded.UseVisualStyleBackColor = true;
             this.btn_Blinded.Click += new System.EventHandler(this.btn_Status_Click);
             // 
@@ -350,33 +405,11 @@ namespace CombatTracker
             this.btn_Dmg.UseVisualStyleBackColor = true;
             this.btn_Dmg.Click += new System.EventHandler(this.btn_Dmg_Click);
             // 
-            // col_Init
+            // toolTip1
             // 
-            this.col_Init.HeaderText = "Initiative";
-            this.col_Init.Name = "col_Init";
-            this.col_Init.ReadOnly = true;
-            this.col_Init.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // col_Name
-            // 
-            this.col_Name.HeaderText = "Name";
-            this.col_Name.Name = "col_Name";
-            this.col_Name.ReadOnly = true;
-            this.col_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // col_HP
-            // 
-            this.col_HP.HeaderText = "HP";
-            this.col_HP.Name = "col_HP";
-            this.col_HP.ReadOnly = true;
-            this.col_HP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // col_Status
-            // 
-            this.col_Status.HeaderText = "Status";
-            this.col_Status.Name = "col_Status";
-            this.col_Status.ReadOnly = true;
-            this.col_Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.toolTip1.AutoPopDelay = 999999;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // CombatTracker
             // 
@@ -443,9 +476,11 @@ namespace CombatTracker
         private System.Windows.Forms.Button btn_Unconcious;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Init;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_StatusText;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_HP;
-        private System.Windows.Forms.DataGridViewImageColumn col_Status;
+        private System.Windows.Forms.DataGridViewImageColumn col_StatusImage;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

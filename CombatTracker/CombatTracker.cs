@@ -40,6 +40,7 @@ namespace CombatTracker
         {
             InitializeComponent();
             Player();
+            dataGridView1.Columns["col_StatusImage"].DefaultCellStyle.NullValue = null;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -202,80 +203,93 @@ namespace CombatTracker
         {
             Button clickedButton = (Button)sender;
 
-            string name = clickedButton.Name;
-
             int index = dataGridView1.CurrentCell.RowIndex;
 
-            Image img = new Image();
+            string name = clickedButton.Name;
+            string status = (dataGridView1.Rows[index].Cells["col_StatusText"].Value != null)? dataGridView1.Rows[index].Cells["col_StatusText"].Value.ToString() : "";
 
-            bool blinded;
-            bool charmed;
-            bool deaf;
-            bool frightned;
-            bool grappled;
-            bool incapacitated;
-            bool invisible;
-            bool paralyzed;
-            bool petrified;
-            bool poisoned;
-            bool prone;
-            bool restrained;
-            bool stunned;
-            bool unconcious;
-
-            //status.Add(Properties.Resources.edit);
+            Image img = new Bitmap(1, 1);
 
             switch (name)
             {
                 case "btn_Blinded":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "blinded,");
                     break;
                 case "btn_Charmed":
-                    img = Properties.Resources.hide;
-                    //status.Add(Properties.Resources.love);
-                    //foreach (Image img in status)
-                    //    dataGridView1.Rows[index].Cells["col_Status"].Value = img;
+                    status = AddRemoveStatus(status, "charmed,");
                     break;
                 case "btn_Deaf":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "deaf,"); 
                     break;
                 case "btn_Frightened":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "frightened,");
                     break;
                 case "btn_Grappled":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "grappled,");
                     break;
                 case "btn_Incapacitated":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "incapacitated,");
                     break;
                 case "btn_Invisible":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "invisible,");
                     break;
                 case "btn_Paralyzed":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "paralyzed,");
                     break;
                 case "btn_Petrified":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "petrified,");
                     break;
                 case "btn_Poisoned":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "poisoned,");
                     break;
                 case "btn_Prone":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "prone,");
                     break;
                 case "btn_Restrained":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "restrained,");
                     break;
                 case "btn_Stunned":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "stunned,");
                     break;
                 case "btn_Unconcious":
-                    img = Properties.Resources.hide;
+                    status = AddRemoveStatus(status, "unconcious,");
                     break;
             }
 
-            var final = MergeTwoImages(img, status);
-            //dataGridView1.Rows[index].Cells["col_Status"].Value = img;
+            dataGridView1.Rows[index].Cells["col_StatusText"].Value = status;
+
+            if (status.Contains("blinded,"))
+                img = MergeTwoImages(Properties.Resources.hide, img);
+            if (status.Contains("charmed,"))
+                img = MergeTwoImages(Properties.Resources.love, img);
+            if (status.Contains("deaf,"))
+                img = MergeTwoImages(Properties.Resources.deaf, img);
+            if (status.Contains("frightened,"))
+                img = MergeTwoImages(Properties.Resources.black_cat, img);
+            if (status.Contains("grappled,"))
+                img = MergeTwoImages(Properties.Resources.hello, img);
+            if (status.Contains("incapacitated,"))
+                img = MergeTwoImages(Properties.Resources.forbidden, img);
+            if (status.Contains("invisible,"))
+                img = MergeTwoImages(Properties.Resources.invisibility, img);
+            if (status.Contains("paralyzed,"))
+                img = MergeTwoImages(Properties.Resources.thunder, img);
+            if (status.Contains("petrified,"))
+                img = MergeTwoImages(Properties.Resources.granite, img);
+            if (status.Contains("poisoned,"))
+                img = MergeTwoImages(Properties.Resources.poison, img);
+            if (status.Contains("prone,"))
+                img = MergeTwoImages(Properties.Resources.no_racism, img);
+            if (status.Contains("restrained,"))
+                img = MergeTwoImages(Properties.Resources.rope, img);
+            if (status.Contains("stunned,"))
+                img = MergeTwoImages(Properties.Resources.flashbang, img);
+            if (status.Contains("unconcious,"))
+                img = MergeTwoImages(Properties.Resources.zzz_sleep_symbol, img);
+            //if (status.Contains("deaf,"))
+            //    img = MergeTwoImages(Properties.Resources., img);
+
+            dataGridView1.Rows[index].Cells["col_StatusImage"].Value = img;
         }
 
         public static Bitmap MergeTwoImages(Image firstImage, Image secondImage)
@@ -305,6 +319,16 @@ namespace CombatTracker
             }
 
             return outputImage;
+        }
+
+        private string AddRemoveStatus(string status, string addRemove)
+        {
+            if (!status.Contains(addRemove))
+                status += addRemove;
+            else
+                status = status.Replace(addRemove, "");
+
+            return status;
         }
     }
 }
