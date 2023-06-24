@@ -18,24 +18,6 @@ namespace CombatTracker
         private bool start = true;
         private bool close;
 
-
-        //private bool blinded;
-        //private bool charmed;
-        //private bool deaf;
-        //private bool frightned;
-        //private bool grappled;
-        //private bool incapacitated;
-        //private bool invisible;
-        //private bool paralyzed;
-        //private bool petrified;
-        //private bool poisoned;
-        //private bool prone;
-        //private bool restrained;
-        //private bool stunned;
-        //private bool unconcious;
-
-        //List<Image> status = new List<Image>();
-
         public CombatTracker()
         {
             InitializeComponent();
