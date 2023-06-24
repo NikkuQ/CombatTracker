@@ -14,6 +14,7 @@ namespace CombatTracker
     {
         private int i = 2;
         private int output;
+        private int resurrect = 1;
 
         private bool start = true;
         private bool close;
@@ -145,11 +146,11 @@ namespace CombatTracker
                 dataGridView1.Rows.Add();
 
             dataGridView1.Rows[0].Cells["col_name"].Value = "Tenente";
-            dataGridView1.Rows[0].Cells["col_HP"].Value = "999";
+            dataGridView1.Rows[0].Cells["col_HP"].Value = 999;
             dataGridView1.Rows[1].Cells["col_name"].Value = "MacBeth";
-            dataGridView1.Rows[1].Cells["col_HP"].Value = "999";
+            dataGridView1.Rows[1].Cells["col_HP"].Value = 999;
             dataGridView1.Rows[2].Cells["col_name"].Value = "Samuel";
-            dataGridView1.Rows[2].Cells["col_HP"].Value = "999";
+            dataGridView1.Rows[2].Cells["col_HP"].Value = 999;
 
             start = false;
         }
@@ -174,9 +175,12 @@ namespace CombatTracker
             int hp = int.Parse(dataGridView1.Rows[index].Cells["col_HP"].Value.ToString());
 
             if (hp > 0)
-                dataGridView1.Rows[index].Cells["col_HP"].Value = "0";
+            {
+                dataGridView1.Rows[index].Cells["col_HP"].Value = 0;
+                resurrect = hp;
+            }
             else
-                dataGridView1.Rows[index].Cells["col_HP"].Value = "999";
+                dataGridView1.Rows[index].Cells["col_HP"].Value = resurrect;
 
             CheckHP(index);
         }
