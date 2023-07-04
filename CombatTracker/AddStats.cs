@@ -21,24 +21,6 @@ namespace CombatTracker
 
         SoundPlayer sp;
 
-        public string Init
-        {
-            get => _init;
-            set => _init = value;
-        }
-
-        public string Nome
-        {
-            get => _nome;
-            set => _nome = value;
-        }
-
-        public string PF
-        {
-            get => _pf;
-            set => _pf = value;
-        }
-
         public AddStats()
         {
             InitializeComponent();

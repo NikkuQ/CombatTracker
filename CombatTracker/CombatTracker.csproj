@@ -94,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="crown.ico" />
+    <None Include="Resources\AA55FF.jpeg" />
+    <None Include="Resources\ADFF2F.jpeg" />
+    <None Include="Resources\aqua-color-solid-background-1920x1080.png" />
+    <None Include="Resources\download.png" />
+    <None Include="Resources\Solid_green.svg.png" />
+    <None Include="Resources\1200px-Square_Yellow.svg.png" />
     <None Include="Resources\rope.png" />
     <None Include="Resources\forbidden.png" />
     <None Include="Resources\zzz-sleep-symbol.png" />

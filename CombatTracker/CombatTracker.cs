@@ -17,6 +17,7 @@ namespace CombatTracker
         private int resurrect = 1;
 
         private bool start = true;
+        private bool first = true;
         private bool close;
 
         public CombatTracker()
@@ -24,6 +25,10 @@ namespace CombatTracker
             InitializeComponent();
             Player();
             dataGridView1.Columns["col_StatusImage"].DefaultCellStyle.NullValue = null;
+            dataGridView1.Columns["col_STleft"].DefaultCellStyle.NullValue = null;
+            dataGridView1.Columns["col_ST"].DefaultCellStyle.NullValue = null;
+            dataGridView1.Columns["col_STright"].DefaultCellStyle.NullValue = null;
+
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -158,7 +163,13 @@ namespace CombatTracker
         private void CheckHP(int index)
         {
             if (int.Parse(dataGridView1.Rows[index].Cells["col_HP"].Value.ToString()) <= 0)
-                    dataGridView1.Rows[index].DefaultCellStyle.BackColor = Color.Red;
+            {
+                dataGridView1.Rows[index].DefaultCellStyle.BackColor = Color.Red;
+                dataGridView1.Rows[index].Cells["col_STleft"].Value = null;
+                dataGridView1.Rows[index].Cells["col_ST"].Value = null;
+                dataGridView1.Rows[index].Cells["col_STright"].Value = null;
+                btn_Status_Click(btn_Kill, null);
+            }
 
             else
                 dataGridView1.Rows[index].DefaultCellStyle.BackColor = Color.White;
@@ -240,6 +251,12 @@ namespace CombatTracker
                 case "btn_Unconcious":
                     status = AddRemoveStatus(status, "unconcious,");
                     break;
+                case "btn_ClearStatus":
+                    status = "";
+                    break;
+                case "btn_Kill":
+                    status = "";
+                    break;
             }
 
             dataGridView1.Rows[index].Cells["col_StatusText"].Value = status;
@@ -315,6 +332,74 @@ namespace CombatTracker
                 status = status.Replace(addRemove, "");
 
             return status;
+        }
+
+        private void tb_Val_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            tb_Val.Clear();
+            tb_Val.ForeColor = Color.Black;
+        }
+
+        private void tb_Val_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (first)
+            {
+                tb_Val.Clear();
+                first = false;
+            }
+        }
+
+        private void btn_ST_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            int index = dataGridView1.CurrentCell.RowIndex;
+
+            string name = clickedButton.Name;
+
+            switch (name)
+            {
+                case "btn_STStart":
+                    CheckST(index, "col_STleft", name);
+                    break;
+                case "btn_STMid":
+                    CheckST(index, "col_ST", name);
+                    break;
+                case "btn_STEnd":
+                    CheckST(index, "col_STright", name);
+                    break;
+            }
+        }
+
+        private void CheckST(int index, string cell, string name)
+        {
+            var value = dataGridView1.Rows[index].Cells[cell].Value;
+            if (value == null)
+                switch (name)
+                {
+                    case "btn_STStart":
+                        dataGridView1.Rows[index].Cells[cell].Value = Properties.Resources.GreenYellow;
+                        break;
+                    case "btn_STMid":
+                        dataGridView1.Rows[index].Cells[cell].Value = Properties.Resources.Aqua;
+                        break;
+                    case "btn_STEnd":
+                        dataGridView1.Rows[index].Cells[cell].Value = Properties.Resources.MediumPurple;
+                        break;
+                }
+            else
+                switch (name)
+                {
+                    case "btn_STStart":
+                        dataGridView1.Rows[index].Cells[cell].Value = null;
+                        break;
+                    case "btn_STMid":
+                        dataGridView1.Rows[index].Cells[cell].Value = null;
+                        break;
+                    case "btn_STEnd":
+                        dataGridView1.Rows[index].Cells[cell].Value = null;
+                        break;
+                }
         }
     }
 }
